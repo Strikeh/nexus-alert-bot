@@ -91,8 +91,11 @@ def whale_notifier(main_context):
     def scan_and_send_alert(block: json):
         messages, errors = process_block(block)
         for msg in messages:
-            bot.send_message(
-                config.DEVELOPER_CHAT_ID if config.DEBUG_MODE else config.ALERT_CHANNEL_ID, msg)
+            if config.DEBUG_MODE:
+                bot.send_message(config.DEVELOPER_CHAT_ID, msg)
+            else:
+                bot.send_message(config.ALERT_CHANNEL_ID,
+                                 config.MESSAGE_THREAD_ID, msg)
         for err in errors:
             send_notifications(err)
 

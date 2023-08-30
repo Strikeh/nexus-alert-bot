@@ -25,6 +25,7 @@ DEVELOPER_CHAT_ID = int(os.environ.get('DEVELOPER_CHAT_ID'))
 DEVELOPER_CHAT_IDS = list(
     map(int, os.environ.get('DEVELOPER_CHAT_IDS').split(',')))
 ALERT_CHANNEL_ID = os.environ.get('ALERT_CHANNEL_ID')  # t.me/nexusalerts
+MESSAGE_THREAD_ID = int(os.environ.get('MESSAGE_THREAD_ID'))
 EXPLORER_DOMAIN = os.environ.get('EXPLORER_DOMAIN')
 NXS_BASE_URL = os.environ.get('NXS_BASE_URL')
 COINGECKO_URL = 'https://api.coingecko.com/api/v3'
