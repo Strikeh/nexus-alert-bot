@@ -68,9 +68,9 @@ def get_fishname_and_emoji(amount) -> list():
         return emojis.get("shrimp") * 2, fish_map.get("shrimp")
 
 
-def whale_notification(block_height, contract, tidx, cidx, currentPrice):
+def whale_notification(block_height, contract, tidx, cidx, current_price) -> str:
     amount = contract.get("amount")
-    price = str(round(amount * currentPrice, 2))
+    price = round(amount * current_price, 2)
 
     fish_emoji, fish_name = get_fishname_and_emoji(amount)
     reply_msg = f""" {fish_emoji}

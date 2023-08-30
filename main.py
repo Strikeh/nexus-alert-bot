@@ -94,8 +94,8 @@ def whale_notifier(main_context):
             if config.DEBUG_MODE:
                 bot.send_message(config.DEVELOPER_CHAT_ID, msg)
             else:
-                bot.send_message(config.ALERT_CHANNEL_ID,
-                                 config.MESSAGE_THREAD_ID, msg)
+                bot.send_mmessage(config.ALERT_CHANNEL_ID, msg,
+                                  reply_to_message_id=config.MESSAGE_THREAD_ID)
         for err in errors:
             send_notifications(err)
 
