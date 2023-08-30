@@ -11,7 +11,7 @@ POLLING_INTERVAL = 20  # in seconds
 if os.environ.get("ENV") == "PROD":
     print("Production mode")
     DEBUG_MODE = False
-    ALERT_AMOUNT = 1000
+    ALERT_AMOUNT = 1  # 1000
     POLLING_INTERVAL = 20
 else:
     print("Development mode")
@@ -24,7 +24,7 @@ HIDE_DEBIT_TXNS = True  # hide debit transactions
 DEVELOPER_CHAT_ID = int(os.environ.get('DEVELOPER_CHAT_ID'))
 DEVELOPER_CHAT_IDS = list(
     map(int, os.environ.get('DEVELOPER_CHAT_IDS').split(',')))
-ALERT_CHANNEL_ID = int(os.environ.get('ALERT_CHANNEL_ID'))  # t.me/nexusalerts
+ALERT_CHANNEL_ID = os.environ.get('ALERT_CHANNEL_ID')  # t.me/nexusalerts
 EXPLORER_DOMAIN = os.environ.get('EXPLORER_DOMAIN')
 NXS_BASE_URL = os.environ.get('NXS_BASE_URL')
 COINGECKO_URL = 'https://api.coingecko.com/api/v3'
