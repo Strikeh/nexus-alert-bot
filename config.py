@@ -11,7 +11,7 @@ POLLING_INTERVAL = 20  # in seconds
 if os.environ.get("ENV") == "PROD":
     print("Production mode")
     DEBUG_MODE = False
-    ALERT_AMOUNT = 1  # 1000
+    ALERT_AMOUNT = 1000  # 1000
     POLLING_INTERVAL = 20
 else:
     print("Development mode")
