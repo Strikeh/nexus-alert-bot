@@ -24,7 +24,7 @@ HIDE_DEBIT_TXNS = True  # hide debit transactions
 DEVELOPER_CHAT_ID = int(os.environ.get('DEVELOPER_CHAT_ID'))
 DEVELOPER_CHAT_IDS = list(
     map(int, os.environ.get('DEVELOPER_CHAT_IDS').split(',')))
-ALERT_CHANNEL_ID = os.environ.get('ALERT_CHANNEL_ID')  # t.me/nexusalerts
+ALERT_CHANNEL_ID = int(os.environ.get('ALERT_CHANNEL_ID'))  # t.me/nexusalerts
 MESSAGE_THREAD_ID = int(os.environ.get('MESSAGE_THREAD_ID'))
 EXPLORER_DOMAIN = os.environ.get('EXPLORER_DOMAIN')
 NXS_BASE_URL = os.environ.get('NXS_BASE_URL')
