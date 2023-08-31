@@ -32,3 +32,4 @@ COINGECKO_URL = 'https://api.coingecko.com/api/v3'
 API_ID = os.environ.get("API_ID")
 API_HASH = os.environ.get("API_HASH")
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
+TRADE_OGRE_GENESIS = 'a1692a0105a5314ff20df189f3db11faadf8820b153a2ff3b941ee47f35781ea'

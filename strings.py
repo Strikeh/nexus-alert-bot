@@ -68,21 +68,28 @@ def get_fishname_and_emoji(amount) -> list():
         return emojis.get("shrimp") * 2, fish_map.get("shrimp")
 
 
-def whale_notification(block_height, contract, tidx, cidx, current_price) -> str:
+def whale_notification(block_height, contract, tidx, cidx, current_price, genesis) -> str:
     amount = contract.get("amount")
     price = round(amount * current_price, 2)
 
+    operation = contract.get("op")  # 'CREDIT'
+    m_for = contract.get("for")  # 'DEBIT'
+
     fish_emoji, fish_name = get_fishname_and_emoji(amount)
-    reply_msg = f""" {fish_emoji}
-📥 {fish_name} found on Block : `{block_height}`
-💰 Amount: `{amount}` `(${price})`
+    reply_msg = f""" {fish_emoji} 
+📥 {fish_name} found on Block : `{block_height}` 
+💰 Amount: `{amount}` `(${price})` {' | Deposited to: <a href="https://tradeogre.com/exchange/BTC-NXS"><b>TradeOgre</b></a>' if genesis == config.TRADE_OGRE_GENESIS and operation == 'CREDIT' 
+                  and m_for == 'DEBIT' else 'None'}   
+{' |  Withdrew from <a href="https://tradeogre.com/exchange/BTC-NXS"><b>TradeOgre</b></a>' if genesis == config.TRADE_OGRE_GENESIS and operation == 'DEBIT' else 'None'}
+{' |  Deposited to <a href="https://global.bittrex.com/trade/nxs-btc"><b>Bittrex Global (95% probability)</b></a>' if operation == 'LEGACY'  else 'None'}
+{' |  Withdrew from <a href="https://global.bittrex.com/trade/nxs-btc"><b>Bittrex Global (95% probability)</b></a>' if operation == 'CREDIT' and m_for == 'LEGACY' else 'None'}
 💎 Token: `{contract.get("token")}`
-🚦 Operation: `{contract.get("op")}`
-☑️ For: `{contract.get("for")}` 
+🚦 Operation: `{operation}`
+☑️ For: `{m_for}`
 🔗 Proof: `{contract.get("proof")}`
 ↘️ From: `{contract.get("from")}`
-↗️ To: `{contract.get("to")}`
-💠 {config.EXPLORER_DOMAIN}/scan/og?block={block_height}&tidx={tidx}&cidx={cidx}"""
+↗️ To: `{contract.get("to")}
+💠 <a href="{config.EXPLORER_DOMAIN}/scan/og?block={block_height}&tidx={tidx}&cidx={cidx}">Show on explorer </a>"""
     return remove_none_lines(reply_msg)
 
 

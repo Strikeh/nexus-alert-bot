@@ -47,6 +47,7 @@ def process_block(block: json, alert_amount: int = config.ALERT_AMOUNT) -> list[
     try:
         for tidx, tx in enumerate(block.get("tx")):
             contracts = tx.get("contracts")
+            genesis = tx.get("genesis")
             if contracts is not None:
                 for cidx, contract in enumerate(contracts):
                     contract_info = extract_contract_info(contract)
@@ -60,7 +61,8 @@ def process_block(block: json, alert_amount: int = config.ALERT_AMOUNT) -> list[
                         if amount >= alert_amount:
                             block_height = block.get("height")
                             message = strings.whale_notification(
-                                block_height, contract_info, tidx, cidx, currentPrice)
+                                block_height, contract_info, tidx,
+                                cidx, currentPrice, genesis)
                             messages.append(message)
                     else:
                         desc = f"`{json.dumps(contract, indent=2)}`\n in block: {block.get('height')}"
