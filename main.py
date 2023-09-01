@@ -1,12 +1,13 @@
+from pyrogram import Client, filters
+
+
 import json
 import time
-import dotenv
-import strings
 import config
+import dotenv
 import logging
+import strings
 import threading
-from pyrogram import Client, filters
-from telegram import ParseMode
 
 from utils import calc_lost_blocks, get_block, get_latest_block, process_block
 dotenv.load_dotenv()
@@ -94,11 +95,10 @@ def whale_notifier(main_context):
         for msg in messages:
             if config.DEBUG_MODE:
                 bot.send_message(config.DEVELOPER_CHAT_ID,
-                                 msg, parse_mode=ParseMode.HTML)
+                                 msg)
             else:
                 bot.send_message(config.ALERT_CHANNEL_ID, msg,
-                                 reply_to_message_id=config.MESSAGE_THREAD_ID,
-                                 parse_mode=ParseMode.HTML)
+                                 reply_to_message_id=config.MESSAGE_THREAD_ID)
         for err in errors:
             send_notifications(err)
 
