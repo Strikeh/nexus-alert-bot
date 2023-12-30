@@ -79,11 +79,16 @@ def whale_notification(block_height, contract, tidx, cidx, current_price, genesi
     reply_msg = f""" {fish_emoji} 
 📥 {fish_name} found on Block : `{block_height}` 
 💰 Amount: `{amount}` `(${price})` 
-{'😳 Deposited to: <a href="https://tradeogre.com/exchange/BTC-NXS"><b>TradeOgre</b></a>' if genesis == config.TRADE_OGRE_GENESIS and operation == 'CREDIT' 
-                  and m_for == 'DEBIT' else 'None' }   
-{'😎 Withdrew from <a href="https://tradeogre.com/exchange/BTC-NXS"><b>TradeOgre</b></a>' if genesis == config.TRADE_OGRE_GENESIS and operation == 'DEBIT' else 'P2P Trade'}
+
+{'😳 Deposited to: <a href="https://tradeogre.com/exchange/BTC-NXS"><b>TradeOgre</b></a>'
+          if genesis == config.TRADE_OGRE_GENESIS and operation == 'CREDIT' and m_for == 'DEBIT'
+          else '😎 Withdrew from <a href="https://tradeogre.com/exchange/BTC-NXS"><b>TradeOgre</b></a>'
+               if genesis == config.TRADE_OGRE_GENESIS and operation == 'DEBIT'
+               else '🛒 P2P Trade'}
+
 {'😳 Deposited to <a href="https://global.bittrex.com/trade/nxs-btc"><b>Bittrex Global (95% probability)</b></a>' if operation == 'LEGACY'  else 'None'}
 {'😎 Withdrew from <a href="https://global.bittrex.com/trade/nxs-btc"><b>Bittrex Global (95% probability)</b></a>' if operation == 'CREDIT' and m_for == 'LEGACY' else 'None'}
+
 💎 Token: `{contract.get("token")}`
 🚦 Operation: `{operation}`
 ☑️ For: `{m_for}`
