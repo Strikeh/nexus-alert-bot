@@ -18,7 +18,7 @@ else:
 
 
 BOT_NAME = "nexus_alert_bot"
-HIDE_DEBIT_TXNS = True  # hide debit transactions
+HIDE_DEBIT_TXNS = False  # hide debit transactions
 
 # * load configurations from env
 DEVELOPER_CHAT_ID = int(os.environ.get('DEVELOPER_CHAT_ID'))
